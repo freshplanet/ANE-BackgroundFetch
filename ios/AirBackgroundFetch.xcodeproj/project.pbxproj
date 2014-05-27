@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39B688AE1912F0A700CD48C7 /* FPANEUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B688AC1912F0A700CD48C7 /* FPANEUtils.h */; };
+		39B688AF1912F0A700CD48C7 /* FPANEUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B688AD1912F0A700CD48C7 /* FPANEUtils.m */; };
 		5A98569C15213BC3003A8EB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A98569B15213BC3003A8EB0 /* Foundation.framework */; };
 		FA8DA7FE16A46CB200CE1D10 /* AirBackgroundFetch-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = FA8DA7FB16A46CB200CE1D10 /* AirBackgroundFetch-Prefix.pch */; };
 		FA8DA7FF16A46CB200CE1D10 /* AirBackgroundFetch.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8DA7FC16A46CB200CE1D10 /* AirBackgroundFetch.h */; };
@@ -16,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		393C0B6D191851FA00CA7B4D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		39B688AC1912F0A700CD48C7 /* FPANEUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPANEUtils.h; sourceTree = "<group>"; };
+		39B688AD1912F0A700CD48C7 /* FPANEUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPANEUtils.m; sourceTree = "<group>"; };
 		5A98569815213BC3003A8EB0 /* libAirBackgroundFetch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirBackgroundFetch.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A98569B15213BC3003A8EB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FA8DA7FB16A46CB200CE1D10 /* AirBackgroundFetch-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AirBackgroundFetch-Prefix.pch"; sourceTree = "<group>"; };
@@ -60,6 +65,7 @@
 			children = (
 				5A98569B15213BC3003A8EB0 /* Foundation.framework */,
 				FA8DA80116A46CD000CE1D10 /* UIKit.framework */,
+				393C0B6D191851FA00CA7B4D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -77,6 +83,8 @@
 		FA8DA80516A46CFF00CE1D10 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				39B688AC1912F0A700CD48C7 /* FPANEUtils.h */,
+				39B688AD1912F0A700CD48C7 /* FPANEUtils.m */,
 				FA8DA7FB16A46CB200CE1D10 /* AirBackgroundFetch-Prefix.pch */,
 				FA8DA80616A46D4500CE1D10 /* FlashRuntimeExtensions.h */,
 			);
@@ -91,6 +99,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA8DA7FE16A46CB200CE1D10 /* AirBackgroundFetch-Prefix.pch in Headers */,
+				39B688AE1912F0A700CD48C7 /* FPANEUtils.h in Headers */,
 				FA8DA7FF16A46CB200CE1D10 /* AirBackgroundFetch.h in Headers */,
 				FA8DA80716A46D4500CE1D10 /* FlashRuntimeExtensions.h in Headers */,
 			);
@@ -122,7 +131,7 @@
 		5A98568F15213BC2003A8EB0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 5A98569215213BC2003A8EB0 /* Build configuration list for PBXProject "AirBackgroundFetch" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -146,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39B688AF1912F0A700CD48C7 /* FPANEUtils.m in Sources */,
 				FA8DA80016A46CB200CE1D10 /* AirBackgroundFetch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,8 +167,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -172,11 +183,15 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -185,17 +200,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				SDKROOT = iphoneos;
@@ -207,9 +226,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/AirBackgroundFetch.dst;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AirBackgroundFetch/AirBackgroundFetch-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				INFOPLIST_FILE = "";
 				INSTALL_PATH = ../;
 				LIBRARY_SEARCH_PATHS = "";
@@ -224,9 +245,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/AirBackgroundFetch.dst;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AirBackgroundFetch/AirBackgroundFetch-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				INSTALL_PATH = ../;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-ObjC";

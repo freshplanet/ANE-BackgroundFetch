@@ -18,7 +18,6 @@
 
 package com.freshplanet.ane.AirBackgroundFetch
 {
-	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
@@ -66,7 +65,6 @@ package com.freshplanet.ane.AirBackgroundFetch
 		}
 		
 		public var logEnabled : Boolean = true;
-		
 
 		
 		// --------------------------------------------------------------------------------------//

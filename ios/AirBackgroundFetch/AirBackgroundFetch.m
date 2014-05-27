@@ -17,76 +17,57 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 #import "AirBackgroundFetch.h"
+#import "FPANEUtils.h"
+#import <objc/runtime.h>
 
-FREContext AirBackgroundFetchCtx = nil;
+typedef void (^AirBackgroundFetchCompletionHandler)(UIBackgroundFetchResult result);
 
-@implementation AirBackgroundFetch
+static FREContext AirBackgroundFetchContext;
 
-#pragma mark - Singleton
-
-static AirBackgroundFetch *sharedInstance = nil;
-
-+ (AirBackgroundFetch *)sharedInstance
+void AirBackgroundFetchApplicationPerformFetchWithCompletionHandler(id self, SEL _cmd, UIApplication *application, AirBackgroundFetchCompletionHandler completionHandler)
 {
-    if (sharedInstance == nil)
-    {
-        sharedInstance = [[super allocWithZone:NULL] init];
-    }
-    
-    return sharedInstance;
+    NSLog(@"Perform fetch");
+    FPANE_Log(AirBackgroundFetchContext, @"Perform fetch");
+    completionHandler(UIBackgroundFetchResultNoData);
 }
-
-+ (id)allocWithZone:(NSZone *)zone
-{
-    return [self sharedInstance];
-}
-
-- (id)copy
-{
-    return self;
-}
-
-#pragma mark - AirBackgroundFetch
-
-+ (void)dispatchEvent:(NSString *)eventName withInfo:(NSString *)info
-{
-    if (AirBackgroundFetchCtx != nil)
-    {
-        FREDispatchStatusEventAsync(AirBackgroundFetchCtx, (const uint8_t *)[eventName UTF8String], (const uint8_t *)[info UTF8String]);
-    }
-}
-
-+ (void)log:(NSString *)message
-{
-    [AirBackgroundFetch dispatchEvent:@"LOGGING" withInfo:message];
-}
-
-@end
-
-
-#pragma mark - C interface
 
 void AirBackgroundFetchContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx,
                         uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) 
 {
-    // Register the links btwn AS3 and ObjC. (dont forget to modify the nbFuntionsToLink integer if you are adding/removing functions)
-    NSInteger nbFuntionsToLink = 0;
-    *numFunctionsToTest = nbFuntionsToLink;
+    NSLog(@"Setup background fetch");
+    static FRENamedFunction functions[] = {};
+    *numFunctionsToTest = sizeof(functions)/sizeof(FRENamedFunction);
+    *functionsToSet = functions;
     
-    FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * nbFuntionsToLink);
+    AirBackgroundFetchContext = ctx;
     
-    *functionsToSet = func;
-    
-    AirBackgroundFetchCtx = ctx;
+    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 }
 
 void AirBackgroundFetchContextFinalizer(FREContext ctx) { }
 
 void AirBackgroundFetchInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet)
 {
+    NSLog(@"AirBackgroundFetchInitializer");
+    
 	*extDataToSet = NULL;
 	*ctxInitializerToSet = &AirBackgroundFetchContextInitializer;
 	*ctxFinalizerToSet = &AirBackgroundFetchContextFinalizer;
 }
 
 void AirBackgroundFetchFinalizer(void *extData) { }
+
+@interface CTAppController : NSObject <UIApplicationDelegate>
+@end
+
+@implementation CTAppController (AirBackgroundFetchAdditions)
+
++ (void)load
+{
+    [super load];
+    
+    NSLog(@"Setup CTAppController");
+    class_replaceMethod(self, @selector(application:performFetchWithCompletionHandler:), (IMP)&AirBackgroundFetchApplicationPerformFetchWithCompletionHandler, "v@:@@?");
+}
+
+@end

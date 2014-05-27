@@ -18,17 +18,6 @@
 
 #import "FlashRuntimeExtensions.h"
 
-@interface AirBackgroundFetch : NSObject
-
-+ (id)sharedInstance;
-
-+ (void)dispatchEvent:(NSString *)eventName withInfo:(NSString *)info;
-+ (void)log:(NSString *)message;
-
-@end
-
-
-// ANE Setup
 void AirBackgroundFetchContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet);
 void AirBackgroundFetchContextFinalizer(FREContext ctx);
 void AirBackgroundFetchInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet);
