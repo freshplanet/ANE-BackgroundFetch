@@ -75,12 +75,29 @@ package com.freshplanet.ane.AirBackgroundFetch
 
 
 		/**
-        * Load a music stream url
+        * Load get-create-mega url/data
         * @param url:String
+        * @param data:jsonString
         */
         public function loadUrl(url:String, data:String):void
         {
             _context.call("loadUrl", url, data);
+        }
+
+        /**
+        * Load a music stream url
+        */
+        public function getUserData():String
+        {
+            return _context.call("getUserData") as String;
+        }
+
+        /**
+        * Load a music stream url
+        */
+        public function flushUserData():void
+        {
+            _context.call("flushUserData");
         }
 
 		
