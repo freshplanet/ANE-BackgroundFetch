@@ -37,16 +37,33 @@ DEFINE_ANE_FUNCTION(loadUrl)
     if (FREGetObjectAsUTF8(argv[0], &string_length, &utf8_message) == FRE_OK)
         url = [NSString stringWithUTF8String:(char*) utf8_message];
     
-    NSLog(@"URL----------------------------------------------------------------------------------------------------------------------------: %@", url);
-    
     NSString* dataString = nil;
     if (FREGetObjectAsUTF8(argv[1], &string_length, &utf8_message) == FRE_OK)
         dataString = [NSString stringWithUTF8String:(char*) utf8_message];
     
-    NSLog(@"DATA????????: %@", dataString);
-    
     [FetchUtils.sharedUtils saveURL:url andData:dataString];
     
+    return NULL;
+}
+
+
+DEFINE_ANE_FUNCTION(getUserData)
+{
+    NSString *userData = [FetchUtils.sharedUtils getUserData];
+    
+    FREObject result;
+    if (FRENewObjectFromUTF8( (uint32_t)userData.length, (const uint8_t *)[userData UTF8String], &result) == FRE_OK)
+    {
+        return result;
+    }
+
+    return NULL;
+}
+
+
+DEFINE_ANE_FUNCTION(flushUserData)
+{
+    [FetchUtils.sharedUtils flushUserData];
     return NULL;
 }
 
@@ -56,10 +73,12 @@ DEFINE_ANE_FUNCTION(loadUrl)
 void AirBackgroundFetchContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx,
                         uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) 
 {
-    NSLog(@"Setup background fetch-------------------------------");
+    NSLog(@"Setup background fetch");
     
     static FRENamedFunction functions[] = {
         MAP_FUNCTION(loadUrl, NULL),
+        MAP_FUNCTION(getUserData, NULL),
+        MAP_FUNCTION(flushUserData, NULL),
     };
     *numFunctionsToTest = sizeof( functions ) / sizeof( FRENamedFunction );
     *functionsToSet = functions;
@@ -67,8 +86,6 @@ void AirBackgroundFetchContextInitializer(void* extData, const uint8_t* ctxType,
     AirBackgroundFetchContext = ctx;
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 }
-
-
 
 void AirBackgroundFetchContextFinalizer(FREContext ctx) { }
 
@@ -94,13 +111,12 @@ void AirBackgroundFetchFinalizer(void *extData) { }
 + (void)load
 {
     [super load];
-    NSLog(@"Setup CTAppController test test test");
+    NSLog(@"Setup CTAppController");
 }
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
-    NSLog(@"Perform fetch in category print stuff");
-    
+    NSLog(@"Perform fetch in category");
     
     FPANE_Log(AirBackgroundFetchContext, @"Perform fetch");
     
@@ -108,11 +124,5 @@ void AirBackgroundFetchFinalizer(void *extData) { }
     
     completionHandler(UIBackgroundFetchResultNoData);
 }
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    NSLog(@"APP ENTERED THE BACKGROUND!!!!!!!!!!!!!!!!!!!!!!");
-}
-
 
 @end

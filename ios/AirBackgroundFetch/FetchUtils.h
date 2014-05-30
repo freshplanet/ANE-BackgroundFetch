@@ -14,5 +14,7 @@
 
 - (void) saveURL:(NSString *)url andData:(NSString *)dataString;
 - (void) fetchUserData;
+- (NSString *) getUserData;
+- (void) flushUserData;
 
 @end

@@ -9,14 +9,15 @@
 #import "FetchUtils.h"
 
 #define URL_KEY @"FETCH_URL_KEY"
-#define POST_PARAMS_KEY @"FETCH_POST_PARAMS_KEY"
+#define PARAMS_KEY @"FETCH_PARAMS_KEY"
+#define USER_DATA_KEY @"FETCH_USER_DATA_KEY"
 
 static FetchUtils *utils = nil;
 
-@interface FetchUtils() <NSURLConnectionDelegate>
+@interface FetchUtils()
 
-@property (nonatomic, retain) NSUserDefaults *defaults;
-@property (nonatomic, retain) NSMutableData *responseData;
+@property (nonatomic, strong) NSUserDefaults *defaults;
+@property (nonatomic, strong) NSMutableData *responseData;
 
 @end
 
@@ -36,47 +37,41 @@ static FetchUtils *utils = nil;
     
     if (self = [super init])
     {
-        self.defaults = [NSUserDefaults standardUserDefaults];
+        _defaults = [NSUserDefaults standardUserDefaults];
     }
     return self;
 }
 
 
-#pragma mark - FETCH
+#pragma mark - CUSTOM
 
 -(void) fetchUserData
 {
-    NSLog(@"URL from disk: %@", [self getUrl]);
-    NSLog(@"DATA from disk: %@", [self getPostParams]);
+    NSString *url = [self addQueryStringToUrlString:[self getUrl] withDictionary:[self getPostParams]];
     
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[self getUrl]]];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     
-    urlRequest.HTTPMethod = @"POST";
-    [urlRequest setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    // Don't forget to add timeout!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    urlRequest.HTTPMethod = @"GET";
     
-//    NSString *requestBodyString = [self getQueryStringFromDictionary:[self getPostParams]];
-//    
-//    NSLog(@"POST PARAMS: %@", requestBodyString);
-//    
-//    urlRequest.HTTPBody = [requestBodyString dataUsingEncoding:NSUTF8StringEncoding];
-//    
-//    NSURLResponse * response = nil;
-//    NSError * error = nil;
-//    NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest
-//                                          returningResponse:&response
-//                                                      error:&error];
-//    
-//    if (error)
-//    {
-//        NSLog(@"ERROR FETCHING: %@", error.userInfo);
-//    }
-//    
-//    NSLog(@"DID FINISH LOADING - data: %@", [NSString stringWithUTF8String:[data bytes]]);
+    NSURLResponse * response = nil;
+    NSError * error = nil;
+    NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest
+                                          returningResponse:&response
+                                                      error:&error];
+    
+    if (error)
+    {
+        NSLog(@"ERROR FETCHING: %@", error.userInfo);
+        return;
+    }
+    
+    NSLog(@"USER DATA SAVED TO DISK");
+    
+    [_defaults setObject:[NSString stringWithUTF8String:[data bytes]] forKey:USER_DATA_KEY];
+    [_defaults synchronize];
 }
 
-
-
-#pragma mark - DISK
 
 - (void) saveURL:(NSString *)url andData:(NSString *)dataString
 {
@@ -85,7 +80,7 @@ static FetchUtils *utils = nil;
         NSLog(@"ATTEMPT SAVING TO DISK");
         
         NSError *error = nil;
-        id data = [NSJSONSerialization JSONObjectWithData:[dataString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
+        NSDictionary *data = [NSJSONSerialization JSONObjectWithData:[dataString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
         
         if (error)
         {
@@ -96,11 +91,17 @@ static FetchUtils *utils = nil;
         NSLog(@"SUCCESSFUL: %@", data);
         
         [_defaults setObject:url forKey:URL_KEY];
-        [_defaults setObject:dataString forKey:POST_PARAMS_KEY];
+        [_defaults setObject:data forKey:PARAMS_KEY];
         [_defaults synchronize];
     }
 }
 
+
+- (void) flushUserData
+{
+    [_defaults setObject:nil forKey:USER_DATA_KEY];
+    [_defaults synchronize];
+}
 
 
 #pragma mark - HELPERS
@@ -112,7 +113,56 @@ static FetchUtils *utils = nil;
 
 -(NSDictionary *) getPostParams
 {
-    return (NSDictionary *)[_defaults objectForKey:POST_PARAMS_KEY];
+    return (NSDictionary *)[_defaults objectForKey:PARAMS_KEY];
+}
+
+-(NSString *) getUserData
+{
+    return (NSString *)[_defaults objectForKey:USER_DATA_KEY];
+}
+
+-(NSString*)urlEscapeString:(NSString *)unencodedString
+{
+    CFStringRef originalStringRef = (__bridge_retained CFStringRef)unencodedString;
+    NSString *s = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,originalStringRef, NULL, NULL,kCFStringEncodingUTF8);
+    CFRelease(originalStringRef);
+    return s;
+}
+
+
+-(NSString*)addQueryStringToUrlString:(NSString *)urlString withDictionary:(NSDictionary *)dictionary
+{
+    NSMutableString *urlWithQuerystring = [[NSMutableString alloc] initWithString:urlString];
+    
+    for (id key in dictionary) {
+        NSString *keyString = [key description];
+        NSString *valueString = [[dictionary objectForKey:key] description];
+        
+        if ([urlWithQuerystring rangeOfString:@"?"].location == NSNotFound) {
+            [urlWithQuerystring appendFormat:@"?%@=%@", [self urlEscapeString:keyString], [self urlEscapeString:valueString]];
+        } else {
+            [urlWithQuerystring appendFormat:@"&%@=%@", [self urlEscapeString:keyString], [self urlEscapeString:valueString]];
+        }
+    }
+    return urlWithQuerystring;
+}
+
+
+-(NSString*)getQueryStringFromDictionary:(NSDictionary *)dictionary
+{
+    NSMutableString *queryString = [[NSMutableString alloc] init];
+    
+    for (id key in dictionary) {
+        NSString *keyString = [key description];
+        NSString *valueString = [[dictionary objectForKey:key] description];
+        
+        if ([queryString length] == 0) {
+            [queryString appendFormat:@"%@=%@", [self urlEscapeString:keyString], [self urlEscapeString:valueString]];
+        } else {
+            [queryString appendFormat:@"&%@=%@", [self urlEscapeString:keyString], [self urlEscapeString:valueString]];
+        }
+    }
+    return queryString;
 }
 
 
