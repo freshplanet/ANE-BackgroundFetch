@@ -10,4 +10,9 @@
 
 @interface FetchUtils : NSObject
 
++ (id) sharedUtils;
+
+- (void) saveURL:(NSString *)url andData:(NSString *)dataString;
+- (void) fetchUserData;
+
 @end
