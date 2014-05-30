@@ -539,6 +539,7 @@
 		5A9856A615213BC3003A8EB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/AirBackgroundFetch.dst;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -558,6 +559,7 @@
 		5A9856A715213BC3003A8EB0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/AirBackgroundFetch.dst;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
