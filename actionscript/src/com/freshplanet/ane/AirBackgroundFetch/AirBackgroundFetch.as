@@ -66,6 +66,23 @@ package com.freshplanet.ane.AirBackgroundFetch
 		
 		public var logEnabled : Boolean = true;
 
+
+		// --------------------------------------------------------------------------------------//
+		//																						 //
+		// 									 	FUNCTIONS										 //
+		// 																						 //
+		// --------------------------------------------------------------------------------------//
+
+
+		/**
+        * Load a music stream url
+        * @param url:String
+        */
+        public function loadUrl(url:String, data:String):void
+        {
+            _context.call("loadUrl", url, data);
+        }
+
 		
 		// --------------------------------------------------------------------------------------//
 		//																						 //
