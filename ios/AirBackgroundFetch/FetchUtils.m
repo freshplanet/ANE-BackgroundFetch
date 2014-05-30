@@ -42,13 +42,6 @@ static FetchUtils *utils = nil;
 }
 
 
-- (void)dealloc
-{
-    // Should never be called, but just here for clarity really.
-    [super dealloc];
-}
-
-
 #pragma mark - FETCH
 
 -(void) fetchUserData
@@ -61,24 +54,24 @@ static FetchUtils *utils = nil;
     urlRequest.HTTPMethod = @"POST";
     [urlRequest setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     
-    NSString *requestBodyString = [self getQueryStringFromDictionary:[self getPostParams]];
-    
-    NSLog(@"POST PARAMS: %@", requestBodyString);
-    
-    urlRequest.HTTPBody = [requestBodyString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSURLResponse * response = nil;
-    NSError * error = nil;
-    NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest
-                                          returningResponse:&response
-                                                      error:&error];
-    
-    if (error)
-    {
-        NSLog(@"ERROR FETCHING: %@", error.userInfo);
-    }
-    
-    NSLog(@"DID FINISH LOADING - data: %@", [NSString stringWithUTF8String:[data bytes]]);
+//    NSString *requestBodyString = [self getQueryStringFromDictionary:[self getPostParams]];
+//    
+//    NSLog(@"POST PARAMS: %@", requestBodyString);
+//    
+//    urlRequest.HTTPBody = [requestBodyString dataUsingEncoding:NSUTF8StringEncoding];
+//    
+//    NSURLResponse * response = nil;
+//    NSError * error = nil;
+//    NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest
+//                                          returningResponse:&response
+//                                                      error:&error];
+//    
+//    if (error)
+//    {
+//        NSLog(@"ERROR FETCHING: %@", error.userInfo);
+//    }
+//    
+//    NSLog(@"DID FINISH LOADING - data: %@", [NSString stringWithUTF8String:[data bytes]]);
 }
 
 
@@ -122,50 +115,5 @@ static FetchUtils *utils = nil;
     return (NSDictionary *)[_defaults objectForKey:POST_PARAMS_KEY];
 }
 
-
-
-// Put a query string onto the end of a url
--(NSString*)getQueryStringFromDictionary:(NSDictionary *)params
-{
-    NSMutableString *urlWithQuerystring = [[[NSMutableString alloc] init] autorelease];
-    // Convert the params into a query string
-    if (params) {
-        for(id key in params) {
-            NSString *sKey = [key description];
-            NSString *sVal = [[params objectForKey:key] description];
-            // Do we need to add ?k=v or &k=v ?
-            if ([urlWithQuerystring length] == 0) {
-                [urlWithQuerystring appendFormat:@"%@=%@", [self urlEscape:sKey], [self urlEscape:sVal]];
-            } else {
-                [urlWithQuerystring appendFormat:@"&%@=%@", [self urlEscape:sKey], [self urlEscape:sVal]];
-            }
-        }
-    }
-    return urlWithQuerystring;
-}
-
-
--(NSString*)urlEscape:(NSString *)unencodedString
-{
-    NSLog(@"URL ESCAPE");
-    
-    CFStringRef originalStringRef = (CFStringRef)unencodedString;
-    NSString *s = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,originalStringRef, NULL, NULL,kCFStringEncodingUTF8);
-    CFRelease(originalStringRef);
-    return [s autorelease];
-}
-
-
-
-
-//-(NSString*)urlEscape:(NSString *)unencodedString
-//{
-//    NSString *s = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
-//                                                                      (CFStringRef)unencodedString,
-//                                                                      NULL,
-//                                                                      (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
-//                                                                      kCFStringEncodingUTF8);
-//    return [s autorelease]; // Due to the 'create rule' we own the above and must autorelease it
-//}
 
 @end
