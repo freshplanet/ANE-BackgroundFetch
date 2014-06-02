@@ -50,8 +50,7 @@ static FetchUtils *utils = nil;
     NSString *url = [self addQueryStringToUrlString:[self getUrl] withDictionary:[self getPostParams]];
     
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-    
-    // Don't forget to add timeout!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    urlRequest.timeoutInterval = 25.0;
     urlRequest.HTTPMethod = @"GET";
     
     NSURLResponse * response = nil;
@@ -66,7 +65,7 @@ static FetchUtils *utils = nil;
         return;
     }
     
-    NSLog(@"USER DATA SAVED TO DISK");
+    NSLog(@"USER DATA FETCHED AND SAVED TO DISK");
     
     [_defaults setObject:[NSString stringWithUTF8String:[data bytes]] forKey:USER_DATA_KEY];
     [_defaults synchronize];
@@ -77,8 +76,6 @@ static FetchUtils *utils = nil;
 {
     if (url && dataString)
     {
-        NSLog(@"ATTEMPT SAVING TO DISK");
-        
         NSError *error = nil;
         NSDictionary *data = [NSJSONSerialization JSONObjectWithData:[dataString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
         
@@ -88,7 +85,7 @@ static FetchUtils *utils = nil;
             return;
         }
 
-        NSLog(@"SUCCESSFUL: %@", data);
+        NSLog(@"BG FETCH GET PARAMS: %@", data);
         
         [_defaults setObject:url forKey:URL_KEY];
         [_defaults setObject:data forKey:PARAMS_KEY];

@@ -73,8 +73,6 @@ DEFINE_ANE_FUNCTION(flushUserData)
 void AirBackgroundFetchContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx,
                         uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) 
 {
-    NSLog(@"Setup background fetch");
-    
     static FRENamedFunction functions[] = {
         MAP_FUNCTION(loadUrl, NULL),
         MAP_FUNCTION(getUserData, NULL),
@@ -91,8 +89,6 @@ void AirBackgroundFetchContextFinalizer(FREContext ctx) { }
 
 void AirBackgroundFetchInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet)
 {
-    NSLog(@"AirBackgroundFetchInitializer");
-    
 	*extDataToSet = NULL;
 	*ctxInitializerToSet = &AirBackgroundFetchContextInitializer;
 	*ctxFinalizerToSet = &AirBackgroundFetchContextFinalizer;
@@ -111,13 +107,10 @@ void AirBackgroundFetchFinalizer(void *extData) { }
 + (void)load
 {
     [super load];
-    NSLog(@"Setup CTAppController");
 }
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
-    NSLog(@"Perform fetch in category");
-    
     FPANE_Log(AirBackgroundFetchContext, @"Perform fetch");
     
     [FetchUtils.sharedUtils fetchUserData];
