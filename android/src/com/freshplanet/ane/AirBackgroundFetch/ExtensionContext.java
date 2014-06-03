@@ -20,6 +20,7 @@ package com.freshplanet.ane.AirBackgroundFetch;
 
 import java.util.HashMap;
 import java.util.Map;
+import android.view.ViewGroup;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
@@ -33,9 +34,6 @@ public class ExtensionContext extends FREContext
 	public Map<String, FREFunction> getFunctions()
 	{
 		Map<String, FREFunction> functions = new HashMap<String, FREFunction>();
-		
-
-		
 		return functions;
 	}
 	

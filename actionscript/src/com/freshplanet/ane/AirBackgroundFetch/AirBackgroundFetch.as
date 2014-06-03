@@ -35,8 +35,7 @@ package com.freshplanet.ane.AirBackgroundFetch
 		public static function get isSupported() : Boolean
 		{
 			var isIOS:Boolean = (Capabilities.manufacturer.indexOf("iOS") != -1);
-			var isAndroid:Boolean = (Capabilities.manufacturer.indexOf("Android") != -1)
-			return isIOS || isAndroid;
+			return isIOS;
 		}
 		
 		public function AirBackgroundFetch()
@@ -65,6 +64,34 @@ package com.freshplanet.ane.AirBackgroundFetch
 		}
 		
 		public var logEnabled : Boolean = true;
+
+
+		// --------------------------------------------------------------------------------------//
+		//																						 //
+		// 									 	FUNCTIONS										 //
+		// 																						 //
+		// --------------------------------------------------------------------------------------//
+
+        public function setFetchURL(url:String, params:String):void
+        {
+			if (!isSupported) return;
+			
+            _context.call("AirBackgroundFetchSetFetchURL", url, params);
+        }
+
+        public function getFetchedData():String
+        {
+			if (!isSupported) return null;
+			
+            return _context.call("AirBackgroundFetchGetFetchedData") as String;
+        }
+
+        public function clearFetchedData():void
+        {
+			if (!isSupported) return;
+			
+            _context.call("AirBackgroundFetchClearFetchedData");
+        }
 
 		
 		// --------------------------------------------------------------------------------------//

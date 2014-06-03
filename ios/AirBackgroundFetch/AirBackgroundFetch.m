@@ -18,28 +18,50 @@
 
 #import "AirBackgroundFetch.h"
 #import "FPANEUtils.h"
+#import "FetchUtils.h"
 #import <objc/runtime.h>
 
-typedef void (^AirBackgroundFetchCompletionHandler)(UIBackgroundFetchResult result);
-
-static FREContext AirBackgroundFetchContext;
-
-void AirBackgroundFetchApplicationPerformFetchWithCompletionHandler(id self, SEL _cmd, UIApplication *application, AirBackgroundFetchCompletionHandler completionHandler)
+DEFINE_ANE_FUNCTION(AirBackgroundFetchSetFetchURL)
 {
-    NSLog(@"Perform fetch");
-    FPANE_Log(AirBackgroundFetchContext, @"Perform fetch");
-    completionHandler(UIBackgroundFetchResultNoData);
+    NSString *url = FPANE_FREObjectToNSString(argv[0]);
+    NSString *jsonParams = FPANE_FREObjectToNSString(argv[1]);
+    [FetchUtils.sharedUtils saveURL:url andData:jsonParams];
+    
+    return nil;
 }
+
+DEFINE_ANE_FUNCTION(AirBackgroundFetchGetFetchedData)
+{
+    NSString *userData = [FetchUtils.sharedUtils getUserData];
+    
+    FREObject result;
+    if (FRENewObjectFromUTF8( (uint32_t)userData.length, (const uint8_t *)[userData UTF8String], &result) == FRE_OK)
+    {
+        return result;
+    }
+
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(AirBackgroundFetchClearFetchedData)
+{
+    [FetchUtils.sharedUtils flushUserData];
+    return nil;
+}
+
+
+#pragma mark - ANE INIT
 
 void AirBackgroundFetchContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx,
                         uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) 
 {
-    NSLog(@"Setup background fetch");
-    static FRENamedFunction functions[] = {};
-    *numFunctionsToTest = sizeof(functions)/sizeof(FRENamedFunction);
+    static FRENamedFunction functions[] = {
+        MAP_FUNCTION(AirBackgroundFetchSetFetchURL, NULL),
+        MAP_FUNCTION(AirBackgroundFetchGetFetchedData, NULL),
+        MAP_FUNCTION(AirBackgroundFetchClearFetchedData, NULL),
+    };
+    *numFunctionsToTest = sizeof( functions ) / sizeof( FRENamedFunction );
     *functionsToSet = functions;
-    
-    AirBackgroundFetchContext = ctx;
     
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 }
@@ -48,14 +70,15 @@ void AirBackgroundFetchContextFinalizer(FREContext ctx) { }
 
 void AirBackgroundFetchInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet)
 {
-    NSLog(@"AirBackgroundFetchInitializer");
-    
 	*extDataToSet = NULL;
 	*ctxInitializerToSet = &AirBackgroundFetchContextInitializer;
 	*ctxFinalizerToSet = &AirBackgroundFetchContextFinalizer;
 }
 
 void AirBackgroundFetchFinalizer(void *extData) { }
+
+
+#pragma mark - app delegate category
 
 @interface CTAppController : NSObject <UIApplicationDelegate>
 @end
@@ -65,9 +88,13 @@ void AirBackgroundFetchFinalizer(void *extData) { }
 + (void)load
 {
     [super load];
+}
+
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
+{
+    [FetchUtils.sharedUtils fetchUserData];
     
-    NSLog(@"Setup CTAppController");
-    class_replaceMethod(self, @selector(application:performFetchWithCompletionHandler:), (IMP)&AirBackgroundFetchApplicationPerformFetchWithCompletionHandler, "v@:@@?");
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 @end
