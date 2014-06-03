@@ -76,21 +76,21 @@ package com.freshplanet.ane.AirBackgroundFetch
         {
 			if (!isSupported) return;
 			
-            _context.call("setFetchURL", url, params);
+            _context.call("AirBackgroundFetchSetFetchURL", url, params);
         }
 
         public function getFetchedData():String
         {
 			if (!isSupported) return null;
 			
-            return _context.call("getFetchedData") as String;
+            return _context.call("AirBackgroundFetchGetFetchedData") as String;
         }
 
         public function clearFetchedData():void
         {
 			if (!isSupported) return;
 			
-            _context.call("clearFetchedData");
+            _context.call("AirBackgroundFetchClearFetchedData");
         }
 
 		
