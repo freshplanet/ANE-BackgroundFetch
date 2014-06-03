@@ -21,50 +21,24 @@
 #import "FetchUtils.h"
 #import <objc/runtime.h>
 
-typedef void (^AirBackgroundFetchCompletionHandler)(UIBackgroundFetchResult result);
-
-static FREContext AirBackgroundFetchContext;
-
-#pragma mark - Fucntions
-
-DEFINE_ANE_FUNCTION(loadUrl)
+DEFINE_ANE_FUNCTION(AirBackgroundFetchSetFetchURL)
 {
-    NSLog(@"loadURL CALL");
+    NSString *url = FPANE_FREObjectToNSString(argv[0]);
+    NSString *jsonParams = FPANE_FREObjectToNSString(argv[1]);
+    [FetchUtils.sharedUtils saveURL:url andData:jsonParams];
     
-    uint32_t string_length;
-    const uint8_t *utf8_message;
-    NSString* url = NULL;
-    if (FREGetObjectAsUTF8(argv[0], &string_length, &utf8_message) == FRE_OK)
-        url = [NSString stringWithUTF8String:(char*) utf8_message];
-    
-    NSString* dataString = nil;
-    if (FREGetObjectAsUTF8(argv[1], &string_length, &utf8_message) == FRE_OK)
-        dataString = [NSString stringWithUTF8String:(char*) utf8_message];
-    
-    [FetchUtils.sharedUtils saveURL:url andData:dataString];
-    
-    return NULL;
+    return nil;
 }
 
-
-DEFINE_ANE_FUNCTION(getUserData)
+DEFINE_ANE_FUNCTION(AirBackgroundFetchGetFetchedData)
 {
-    NSString *userData = [FetchUtils.sharedUtils getUserData];
-    
-    FREObject result;
-    if (FRENewObjectFromUTF8( (uint32_t)userData.length, (const uint8_t *)[userData UTF8String], &result) == FRE_OK)
-    {
-        return result;
-    }
-
-    return NULL;
+    return FPANE_NSStringToFREObject([FetchUtils.sharedUtils getUserData]);
 }
 
-
-DEFINE_ANE_FUNCTION(flushUserData)
+DEFINE_ANE_FUNCTION(AirBackgroundFetchClearFetchedData)
 {
     [FetchUtils.sharedUtils flushUserData];
-    return NULL;
+    return nil;
 }
 
 
@@ -74,14 +48,13 @@ void AirBackgroundFetchContextInitializer(void* extData, const uint8_t* ctxType,
                         uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) 
 {
     static FRENamedFunction functions[] = {
-        MAP_FUNCTION(loadUrl, NULL),
-        MAP_FUNCTION(getUserData, NULL),
-        MAP_FUNCTION(flushUserData, NULL),
+        MAP_FUNCTION(AirBackgroundFetchSetFetchURL, NULL),
+        MAP_FUNCTION(AirBackgroundFetchGetFetchedData, NULL),
+        MAP_FUNCTION(AirBackgroundFetchClearFetchedData, NULL),
     };
     *numFunctionsToTest = sizeof( functions ) / sizeof( FRENamedFunction );
     *functionsToSet = functions;
     
-    AirBackgroundFetchContext = ctx;
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 }
 
@@ -111,11 +84,9 @@ void AirBackgroundFetchFinalizer(void *extData) { }
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
-    FPANE_Log(AirBackgroundFetchContext, @"Perform fetch");
-    
     [FetchUtils.sharedUtils fetchUserData];
     
-    completionHandler(UIBackgroundFetchResultNoData);
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 @end

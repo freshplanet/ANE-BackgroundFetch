@@ -35,8 +35,7 @@ package com.freshplanet.ane.AirBackgroundFetch
 		public static function get isSupported() : Boolean
 		{
 			var isIOS:Boolean = (Capabilities.manufacturer.indexOf("iOS") != -1);
-			var isAndroid:Boolean = (Capabilities.manufacturer.indexOf("Android") != -1)
-			return isIOS || isAndroid;
+			return isIOS;
 		}
 		
 		public function AirBackgroundFetch()
@@ -73,31 +72,25 @@ package com.freshplanet.ane.AirBackgroundFetch
 		// 																						 //
 		// --------------------------------------------------------------------------------------//
 
-
-		/**
-        * Load get-create-mega url/data
-        * @param url:String
-        * @param data:jsonString
-        */
-        public function loadUrl(url:String, data:String):void
+        public function setFetchURL(url:String, params:String):void
         {
-            _context.call("loadUrl", url, data);
+			if (!isSupported) return;
+			
+            _context.call("setFetchURL", url, params);
         }
 
-        /**
-        * Load a music stream url
-        */
-        public function getUserData():String
+        public function getFetchedData():String
         {
-            return _context.call("getUserData") as String;
+			if (!isSupported) return null;
+			
+            return _context.call("getFetchedData") as String;
         }
 
-        /**
-        * Load a music stream url
-        */
-        public function flushUserData():void
+        public function clearFetchedData():void
         {
-            _context.call("flushUserData");
+			if (!isSupported) return;
+			
+            _context.call("clearFetchedData");
         }
 
 		
