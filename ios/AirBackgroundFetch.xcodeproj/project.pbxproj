@@ -20,55 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2C41B944193623A000F10D45 /* Songpop free-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Songpop free-Info.plist"; sourceTree = "<group>"; };
-		2C41B946193623A000F10D45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2C41B948193623A000F10D45 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2C41B94A193623A000F10D45 /* Songpop free-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Songpop free-Prefix.pch"; sourceTree = "<group>"; };
-		2C41B94B193623A000F10D45 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		2C41B94C193623A000F10D45 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2C41B94E193623A000F10D45 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		2C41B95C193623A000F10D45 /* Songpop freeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Songpop freeTests-Info.plist"; sourceTree = "<group>"; };
-		2C41B95E193623A000F10D45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2C41B960193623A000F10D45 /* Songpop_freeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Songpop_freeTests.m; sourceTree = "<group>"; };
-		2C41B9731936257F00F10D45 /* SongPop Free-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SongPop Free-Info.plist"; sourceTree = "<group>"; };
-		2C41B9751936257F00F10D45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2C41B9771936257F00F10D45 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2C41B9791936257F00F10D45 /* SongPop Free-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SongPop Free-Prefix.pch"; sourceTree = "<group>"; };
-		2C41B97A1936257F00F10D45 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		2C41B97B1936257F00F10D45 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2C41B97E1936257F00F10D45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2C41B9801936257F00F10D45 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2C41B9811936257F00F10D45 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		2C41B9831936257F00F10D45 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		2C41B9911936257F00F10D45 /* SongPop FreeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SongPop FreeTests-Info.plist"; sourceTree = "<group>"; };
-		2C41B9931936257F00F10D45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2C41B9951936257F00F10D45 /* SongPop_FreeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SongPop_FreeTests.m; sourceTree = "<group>"; };
 		2C41B99D193680B400F10D45 /* FetchUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchUtils.h; sourceTree = "<group>"; };
 		2C41B99E193680B400F10D45 /* FetchUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchUtils.m; sourceTree = "<group>"; };
-		2CD01F87193551E000CEBD7E /* Application-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Application-Info.plist"; sourceTree = "<group>"; };
-		2CD01F89193551E000CEBD7E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2CD01F8B193551E000CEBD7E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2CD01F8D193551E000CEBD7E /* Application-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Application-Prefix.pch"; sourceTree = "<group>"; };
-		2CD01F8E193551E000CEBD7E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		2CD01F8F193551E000CEBD7E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2CD01F91193551E000CEBD7E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		2CD01F98193551E000CEBD7E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		2CD01FA0193551E000CEBD7E /* ApplicationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ApplicationTests-Info.plist"; sourceTree = "<group>"; };
-		2CD01FA2193551E000CEBD7E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2CD01FA4193551E000CEBD7E /* ApplicationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationTests.m; sourceTree = "<group>"; };
-		2CD01FB7193621C100CEBD7E /* Application-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Application-Info.plist"; sourceTree = "<group>"; };
-		2CD01FB9193621C100CEBD7E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2CD01FBB193621C100CEBD7E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2CD01FBD193621C100CEBD7E /* Application-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Application-Prefix.pch"; sourceTree = "<group>"; };
-		2CD01FBE193621C100CEBD7E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		2CD01FBF193621C100CEBD7E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2CD01FC2193621C100CEBD7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2CD01FC4193621C100CEBD7E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2CD01FC5193621C100CEBD7E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		2CD01FC7193621C100CEBD7E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		2CD01FD5193621C100CEBD7E /* ApplicationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ApplicationTests-Info.plist"; sourceTree = "<group>"; };
-		2CD01FD7193621C100CEBD7E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2CD01FD9193621C100CEBD7E /* ApplicationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationTests.m; sourceTree = "<group>"; };
 		393C0B6D191851FA00CA7B4D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		39B688AC1912F0A700CD48C7 /* FPANEUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPANEUtils.h; sourceTree = "<group>"; };
 		39B688AD1912F0A700CD48C7 /* FPANEUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPANEUtils.m; sourceTree = "<group>"; };
@@ -94,184 +47,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2C41B942193623A000F10D45 /* Songpop free */ = {
-			isa = PBXGroup;
-			children = (
-				2C41B94B193623A000F10D45 /* AppDelegate.h */,
-				2C41B94C193623A000F10D45 /* AppDelegate.m */,
-				2C41B94E193623A000F10D45 /* Images.xcassets */,
-				2C41B943193623A000F10D45 /* Supporting Files */,
-			);
-			path = "Songpop free";
-			sourceTree = "<group>";
-		};
-		2C41B943193623A000F10D45 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2C41B944193623A000F10D45 /* Songpop free-Info.plist */,
-				2C41B945193623A000F10D45 /* InfoPlist.strings */,
-				2C41B948193623A000F10D45 /* main.m */,
-				2C41B94A193623A000F10D45 /* Songpop free-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2C41B95A193623A000F10D45 /* Songpop freeTests */ = {
-			isa = PBXGroup;
-			children = (
-				2C41B960193623A000F10D45 /* Songpop_freeTests.m */,
-				2C41B95B193623A000F10D45 /* Supporting Files */,
-			);
-			path = "Songpop freeTests";
-			sourceTree = "<group>";
-		};
-		2C41B95B193623A000F10D45 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2C41B95C193623A000F10D45 /* Songpop freeTests-Info.plist */,
-				2C41B95D193623A000F10D45 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2C41B9711936257F00F10D45 /* SongPop Free */ = {
-			isa = PBXGroup;
-			children = (
-				2C41B97A1936257F00F10D45 /* AppDelegate.h */,
-				2C41B97B1936257F00F10D45 /* AppDelegate.m */,
-				2C41B97D1936257F00F10D45 /* Main.storyboard */,
-				2C41B9801936257F00F10D45 /* ViewController.h */,
-				2C41B9811936257F00F10D45 /* ViewController.m */,
-				2C41B9831936257F00F10D45 /* Images.xcassets */,
-				2C41B9721936257F00F10D45 /* Supporting Files */,
-			);
-			path = "SongPop Free";
-			sourceTree = "<group>";
-		};
-		2C41B9721936257F00F10D45 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2C41B9731936257F00F10D45 /* SongPop Free-Info.plist */,
-				2C41B9741936257F00F10D45 /* InfoPlist.strings */,
-				2C41B9771936257F00F10D45 /* main.m */,
-				2C41B9791936257F00F10D45 /* SongPop Free-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2C41B98F1936257F00F10D45 /* SongPop FreeTests */ = {
-			isa = PBXGroup;
-			children = (
-				2C41B9951936257F00F10D45 /* SongPop_FreeTests.m */,
-				2C41B9901936257F00F10D45 /* Supporting Files */,
-			);
-			path = "SongPop FreeTests";
-			sourceTree = "<group>";
-		};
-		2C41B9901936257F00F10D45 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2C41B9911936257F00F10D45 /* SongPop FreeTests-Info.plist */,
-				2C41B9921936257F00F10D45 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2CD01F85193551E000CEBD7E /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				2CD01F8E193551E000CEBD7E /* AppDelegate.h */,
-				2CD01F8F193551E000CEBD7E /* AppDelegate.m */,
-				2CD01F91193551E000CEBD7E /* Images.xcassets */,
-				2CD01F86193551E000CEBD7E /* Supporting Files */,
-			);
-			path = Application;
-			sourceTree = "<group>";
-		};
-		2CD01F86193551E000CEBD7E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2CD01F87193551E000CEBD7E /* Application-Info.plist */,
-				2CD01F88193551E000CEBD7E /* InfoPlist.strings */,
-				2CD01F8B193551E000CEBD7E /* main.m */,
-				2CD01F8D193551E000CEBD7E /* Application-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2CD01F9E193551E000CEBD7E /* ApplicationTests */ = {
-			isa = PBXGroup;
-			children = (
-				2CD01FA4193551E000CEBD7E /* ApplicationTests.m */,
-				2CD01F9F193551E000CEBD7E /* Supporting Files */,
-			);
-			path = ApplicationTests;
-			sourceTree = "<group>";
-		};
-		2CD01F9F193551E000CEBD7E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2CD01FA0193551E000CEBD7E /* ApplicationTests-Info.plist */,
-				2CD01FA1193551E000CEBD7E /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2CD01FB5193621C100CEBD7E /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				2CD01FBE193621C100CEBD7E /* AppDelegate.h */,
-				2CD01FBF193621C100CEBD7E /* AppDelegate.m */,
-				2CD01FC1193621C100CEBD7E /* Main.storyboard */,
-				2CD01FC4193621C100CEBD7E /* ViewController.h */,
-				2CD01FC5193621C100CEBD7E /* ViewController.m */,
-				2CD01FC7193621C100CEBD7E /* Images.xcassets */,
-				2CD01FB6193621C100CEBD7E /* Supporting Files */,
-			);
-			path = Application;
-			sourceTree = "<group>";
-		};
-		2CD01FB6193621C100CEBD7E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2CD01FB7193621C100CEBD7E /* Application-Info.plist */,
-				2CD01FB8193621C100CEBD7E /* InfoPlist.strings */,
-				2CD01FBB193621C100CEBD7E /* main.m */,
-				2CD01FBD193621C100CEBD7E /* Application-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2CD01FD3193621C100CEBD7E /* ApplicationTests */ = {
-			isa = PBXGroup;
-			children = (
-				2CD01FD9193621C100CEBD7E /* ApplicationTests.m */,
-				2CD01FD4193621C100CEBD7E /* Supporting Files */,
-			);
-			path = ApplicationTests;
-			sourceTree = "<group>";
-		};
-		2CD01FD4193621C100CEBD7E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2CD01FD5193621C100CEBD7E /* ApplicationTests-Info.plist */,
-				2CD01FD6193621C100CEBD7E /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		5A98568D15213BC2003A8EB0 = {
 			isa = PBXGroup;
 			children = (
 				FA8DA7FA16A46CB200CE1D10 /* AirBackgroundFetch */,
-				2CD01F85193551E000CEBD7E /* Application */,
-				2CD01F9E193551E000CEBD7E /* ApplicationTests */,
-				2CD01FB5193621C100CEBD7E /* Application */,
-				2CD01FD3193621C100CEBD7E /* ApplicationTests */,
-				2C41B942193623A000F10D45 /* Songpop free */,
-				2C41B95A193623A000F10D45 /* Songpop freeTests */,
-				2C41B9711936257F00F10D45 /* SongPop Free */,
-				2C41B98F1936257F00F10D45 /* SongPop FreeTests */,
 				5A98569A15213BC3003A8EB0 /* Frameworks */,
 				5A98569915213BC3003A8EB0 /* Products */,
 			);
@@ -291,7 +70,6 @@
 				5A98569B15213BC3003A8EB0 /* Foundation.framework */,
 				FA8DA80116A46CD000CE1D10 /* UIKit.framework */,
 				393C0B6D191851FA00CA7B4D /* CoreGraphics.framework */,
-				2CD01F98193551E000CEBD7E /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -392,89 +170,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		2C41B945193623A000F10D45 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C41B946193623A000F10D45 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		2C41B95D193623A000F10D45 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C41B95E193623A000F10D45 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		2C41B9741936257F00F10D45 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C41B9751936257F00F10D45 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		2C41B97D1936257F00F10D45 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C41B97E1936257F00F10D45 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		2C41B9921936257F00F10D45 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C41B9931936257F00F10D45 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		2CD01F88193551E000CEBD7E /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2CD01F89193551E000CEBD7E /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		2CD01FA1193551E000CEBD7E /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2CD01FA2193551E000CEBD7E /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		2CD01FB8193621C100CEBD7E /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2CD01FB9193621C100CEBD7E /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		2CD01FC1193621C100CEBD7E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2CD01FC2193621C100CEBD7E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		2CD01FD6193621C100CEBD7E /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2CD01FD7193621C100CEBD7E /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5A9856A315213BC3003A8EB0 /* Debug */ = {
