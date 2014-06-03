@@ -32,7 +32,15 @@ DEFINE_ANE_FUNCTION(AirBackgroundFetchSetFetchURL)
 
 DEFINE_ANE_FUNCTION(AirBackgroundFetchGetFetchedData)
 {
-    return FPANE_NSStringToFREObject([FetchUtils.sharedUtils getUserData]);
+    NSString *userData = [FetchUtils.sharedUtils getUserData];
+    
+    FREObject result;
+    if (FRENewObjectFromUTF8( (uint32_t)userData.length, (const uint8_t *)[userData UTF8String], &result) == FRE_OK)
+    {
+        return result;
+    }
+
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION(AirBackgroundFetchClearFetchedData)
