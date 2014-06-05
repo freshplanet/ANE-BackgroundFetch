@@ -21,6 +21,8 @@
 #import "FetchUtils.h"
 #import <objc/runtime.h>
 
+static FREContext context;
+
 DEFINE_ANE_FUNCTION(AirBackgroundFetchSetFetchURL)
 {
     NSString *url = FPANE_FREObjectToNSString(argv[0]);
@@ -63,6 +65,8 @@ void AirBackgroundFetchContextInitializer(void* extData, const uint8_t* ctxType,
     *numFunctionsToTest = sizeof( functions ) / sizeof( FRENamedFunction );
     *functionsToSet = functions;
     
+    context = ctx;
+    
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 }
 
@@ -93,6 +97,7 @@ void AirBackgroundFetchFinalizer(void *extData) { }
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
     [FetchUtils.sharedUtils fetchUserData];
+    FREDispatchStatusEventAsync(context, (const uint8_t *)"DID_FETCH_DATA", (const uint8_t *)"OK");
     
     completionHandler(UIBackgroundFetchResultNewData);
 }

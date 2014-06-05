@@ -18,6 +18,7 @@
 
 package com.freshplanet.ane.AirBackgroundFetch
 {
+	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
@@ -30,6 +31,8 @@ package com.freshplanet.ane.AirBackgroundFetch
 		// 									   PUBLIC API										 //
 		// 																						 //
 		// --------------------------------------------------------------------------------------//
+		
+		public static const DID_FETCH_DATA:String = "DidFetchData";
 		
 		/** AirBackgroundFetch is supported on iOS and Android devices. */
 		public static function get isSupported() : Boolean
@@ -111,6 +114,10 @@ package com.freshplanet.ane.AirBackgroundFetch
 			if (event.code == "LOGGING") // Simple log message
 			{
 				log(event.level);
+			}
+			else if (event.code == "DID_FETCH_DATA")
+			{
+				dispatchEvent(new Event(DID_FETCH_DATA));
 			}
 		}
 		
