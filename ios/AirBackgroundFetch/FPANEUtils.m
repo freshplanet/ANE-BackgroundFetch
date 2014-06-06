@@ -119,6 +119,13 @@ NSInteger FPANE_FREObjectToInt(FREObject object)
     return i;
 }
 
+double FPANE_FREObjectToDouble(FREObject object)
+{
+    double x;
+    FREGetObjectAsDouble(object, &x);
+    return x;
+}
+
 
 #pragma mark - Obj-C -> FREObject
 

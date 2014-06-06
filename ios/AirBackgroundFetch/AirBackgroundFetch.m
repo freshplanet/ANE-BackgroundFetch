@@ -17,60 +17,60 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 #import "AirBackgroundFetch.h"
+#import "BackgroundFetch.h"
 #import "FPANEUtils.h"
-#import "FetchUtils.h"
-#import <objc/runtime.h>
 
-static FREContext context;
-
-DEFINE_ANE_FUNCTION(AirBackgroundFetchSetFetchURL)
+DEFINE_ANE_FUNCTION(AirBackgroundFetch_setMinimumBackgroundFetchInterval)
 {
-    NSString *url = FPANE_FREObjectToNSString(argv[0]);
-    NSString *jsonParams = FPANE_FREObjectToNSString(argv[1]);
-    [FetchUtils.sharedUtils saveURL:url andData:jsonParams];
-    
-    return nil;
-}
-
-DEFINE_ANE_FUNCTION(AirBackgroundFetchGetFetchedData)
-{
-    NSString *userData = [FetchUtils.sharedUtils getUserData];
-    
-    FREObject result;
-    if (FRENewObjectFromUTF8( (uint32_t)userData.length, (const uint8_t *)[userData UTF8String], &result) == FRE_OK)
+    UIApplication *application = [UIApplication sharedApplication];
+    if (argc > 0 && [application respondsToSelector:@selector(setMinimumBackgroundFetchInterval:)])
     {
-        return result;
+        NSInteger minimumBackgroundFetchInterval = FPANE_FREObjectToInt(argv[0]);
+        switch (minimumBackgroundFetchInterval)
+        {
+            case -1:
+                FPANE_Log(context, @"Set minimum background fetch interval to never");
+                [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalNever];
+                break;
+            
+            case 0:
+                FPANE_Log(context, @"Set minimum background fetch interval to minimum");
+                [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+                break;
+                
+            default:
+                FPANE_Log(context, [NSString stringWithFormat:@"Set minimum background fetch interval to %li seconds", (long)minimumBackgroundFetchInterval]);
+                [application setMinimumBackgroundFetchInterval:minimumBackgroundFetchInterval];
+                break;
+        }
     }
-
     return nil;
 }
 
-DEFINE_ANE_FUNCTION(AirBackgroundFetchClearFetchedData)
+DEFINE_ANE_FUNCTION(AirBackgroundFetch_cancelAll)
 {
-    [FetchUtils.sharedUtils flushUserData];
+    [BackgroundFetch cancelAll];
     return nil;
 }
 
-
-#pragma mark - ANE INIT
-
-void AirBackgroundFetchContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx,
-                        uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) 
+void AirBackgroundFetchContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet)
 {
-    static FRENamedFunction functions[] = {
-        MAP_FUNCTION(AirBackgroundFetchSetFetchURL, NULL),
-        MAP_FUNCTION(AirBackgroundFetchGetFetchedData, NULL),
-        MAP_FUNCTION(AirBackgroundFetchClearFetchedData, NULL),
-    };
-    *numFunctionsToTest = sizeof( functions ) / sizeof( FRENamedFunction );
-    *functionsToSet = functions;
-    
-    context = ctx;
-    
-    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    if (strcmp((char *)ctxType, "fetch") == 0 || strcmp((char *)ctxType, "remote-notification") == 0)
+    {
+        BackgroundFetchListFunctions(functionsToSet, numFunctionsToTest);
+    }
+    else
+    {
+        static FRENamedFunction functions[] = {
+            MAP_FUNCTION(AirBackgroundFetch_setMinimumBackgroundFetchInterval, NULL),
+            MAP_FUNCTION(AirBackgroundFetch_cancelAll, NULL)
+        };
+        *numFunctionsToTest = sizeof(functions) / sizeof(FRENamedFunction);
+        *functionsToSet = functions;
+    }
 }
 
-void AirBackgroundFetchContextFinalizer(FREContext ctx) { }
+void AirBackgroundFetchContextFinalizer(FREContext ctx) {}
 
 void AirBackgroundFetchInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet)
 {
@@ -79,27 +79,4 @@ void AirBackgroundFetchInitializer(void** extDataToSet, FREContextInitializer* c
 	*ctxFinalizerToSet = &AirBackgroundFetchContextFinalizer;
 }
 
-void AirBackgroundFetchFinalizer(void *extData) { }
-
-
-#pragma mark - app delegate category
-
-@interface CTAppController : NSObject <UIApplicationDelegate>
-@end
-
-@implementation CTAppController (AirBackgroundFetchAdditions)
-
-+ (void)load
-{
-    [super load];
-}
-
-- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
-{
-    [FetchUtils.sharedUtils fetchUserData];
-    FREDispatchStatusEventAsync(context, (const uint8_t *)"DID_FETCH_DATA", (const uint8_t *)"OK");
-    
-    completionHandler(UIBackgroundFetchResultNewData);
-}
-
-@end
+void AirBackgroundFetchFinalizer(void *extData) {}

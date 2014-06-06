@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		2C41B99F193680B400F10D45 /* FetchUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C41B99D193680B400F10D45 /* FetchUtils.h */; };
 		2C41B9A0193680B400F10D45 /* FetchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C41B99E193680B400F10D45 /* FetchUtils.m */; };
+		3931E9E31942217E001AC0BE /* CTAppController+AirBackgroundFetchAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3931E9E11942217E001AC0BE /* CTAppController+AirBackgroundFetchAdditions.h */; };
+		3931E9E41942217E001AC0BE /* CTAppController+AirBackgroundFetchAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3931E9E21942217E001AC0BE /* CTAppController+AirBackgroundFetchAdditions.m */; };
+		3931E9E719422587001AC0BE /* BackgroundFetch.h in Headers */ = {isa = PBXBuildFile; fileRef = 3931E9E519422587001AC0BE /* BackgroundFetch.h */; };
+		3931E9E819422587001AC0BE /* BackgroundFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3931E9E619422587001AC0BE /* BackgroundFetch.m */; };
 		39B688AE1912F0A700CD48C7 /* FPANEUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B688AC1912F0A700CD48C7 /* FPANEUtils.h */; };
 		39B688AF1912F0A700CD48C7 /* FPANEUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B688AD1912F0A700CD48C7 /* FPANEUtils.m */; };
 		5A98569C15213BC3003A8EB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A98569B15213BC3003A8EB0 /* Foundation.framework */; };
@@ -22,6 +26,10 @@
 /* Begin PBXFileReference section */
 		2C41B99D193680B400F10D45 /* FetchUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchUtils.h; sourceTree = "<group>"; };
 		2C41B99E193680B400F10D45 /* FetchUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchUtils.m; sourceTree = "<group>"; };
+		3931E9E11942217E001AC0BE /* CTAppController+AirBackgroundFetchAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTAppController+AirBackgroundFetchAdditions.h"; sourceTree = "<group>"; };
+		3931E9E21942217E001AC0BE /* CTAppController+AirBackgroundFetchAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTAppController+AirBackgroundFetchAdditions.m"; sourceTree = "<group>"; };
+		3931E9E519422587001AC0BE /* BackgroundFetch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundFetch.h; sourceTree = "<group>"; };
+		3931E9E619422587001AC0BE /* BackgroundFetch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundFetch.m; sourceTree = "<group>"; };
 		393C0B6D191851FA00CA7B4D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		39B688AC1912F0A700CD48C7 /* FPANEUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPANEUtils.h; sourceTree = "<group>"; };
 		39B688AD1912F0A700CD48C7 /* FPANEUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPANEUtils.m; sourceTree = "<group>"; };
@@ -79,6 +87,10 @@
 			children = (
 				FA8DA7FC16A46CB200CE1D10 /* AirBackgroundFetch.h */,
 				FA8DA7FD16A46CB200CE1D10 /* AirBackgroundFetch.m */,
+				3931E9E519422587001AC0BE /* BackgroundFetch.h */,
+				3931E9E619422587001AC0BE /* BackgroundFetch.m */,
+				3931E9E11942217E001AC0BE /* CTAppController+AirBackgroundFetchAdditions.h */,
+				3931E9E21942217E001AC0BE /* CTAppController+AirBackgroundFetchAdditions.m */,
 				FA8DA80516A46CFF00CE1D10 /* Supporting Files */,
 			);
 			path = AirBackgroundFetch;
@@ -104,7 +116,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3931E9E719422587001AC0BE /* BackgroundFetch.h in Headers */,
 				FA8DA7FE16A46CB200CE1D10 /* AirBackgroundFetch-Prefix.pch in Headers */,
+				3931E9E31942217E001AC0BE /* CTAppController+AirBackgroundFetchAdditions.h in Headers */,
 				39B688AE1912F0A700CD48C7 /* FPANEUtils.h in Headers */,
 				FA8DA7FF16A46CB200CE1D10 /* AirBackgroundFetch.h in Headers */,
 				2C41B99F193680B400F10D45 /* FetchUtils.h in Headers */,
@@ -163,6 +177,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3931E9E819422587001AC0BE /* BackgroundFetch.m in Sources */,
+				3931E9E41942217E001AC0BE /* CTAppController+AirBackgroundFetchAdditions.m in Sources */,
 				2C41B9A0193680B400F10D45 /* FetchUtils.m in Sources */,
 				39B688AF1912F0A700CD48C7 /* FPANEUtils.m in Sources */,
 				FA8DA80016A46CB200CE1D10 /* AirBackgroundFetch.m in Sources */,
@@ -194,6 +210,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -220,6 +237,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
