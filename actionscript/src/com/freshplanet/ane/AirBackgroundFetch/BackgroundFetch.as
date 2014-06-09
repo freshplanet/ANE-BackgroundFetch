@@ -49,13 +49,15 @@ package com.freshplanet.ane.AirBackgroundFetch
 		
 		public static function set minimumBackgroundFetchInterval(value: int): void
 		{
+			if (!isSupported) return; 
+			
 			defaultContext.call("AirBackgroundFetch_setMinimumBackgroundFetchInterval", value);
 		}
 		
 		public static var logEnabled: Boolean = true;
 		
 		public function BackgroundFetch(backgroundMode: String, url: String)
-		{
+		{	
 			if (backgroundMode != BACKGROUND_MODE_FETCH && backgroundMode != BACKGROUND_MODE_REMOTE_NOTIFICATION)
 			{
 				log("ERROR - Invalid background mode value: " + backgroundMode);
@@ -67,9 +69,11 @@ package com.freshplanet.ane.AirBackgroundFetch
 			{
 				log("ERROR - Extension context is null. Please check if extension.xml is setup correctly.");
 				return;
-			}
-			_context.call("AirBackgroundFetch_init", backgroundMode, url);
+			}			
 			_context.addEventListener(StatusEvent.STATUS, onStatus);
+			
+			if (!isSupported) return;
+			_context.call("AirBackgroundFetch_init", backgroundMode, url);
 		}
 		
 		public static function cancelAll(): void
