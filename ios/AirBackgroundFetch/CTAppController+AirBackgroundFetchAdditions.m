@@ -66,7 +66,10 @@
         [self ABF_application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
     }
     
-    [BackgroundFetch performFetchWithBackgroundMode:@"remote-notification" completionHandler:completionHandler];
+    if (application.applicationState == UIApplicationStateBackground)
+    {
+        [BackgroundFetch performFetchWithBackgroundMode:@"remote-notification" completionHandler:completionHandler];
+    }
 }
 
 @end
